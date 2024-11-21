@@ -1,10 +1,12 @@
 import express from "express";
 
-import { userRoute } from "./routes";
+import { taskRoute, userRoute } from "./routes";
 
 const app: express.Application = express();
 
+app.use(express.json());
 app.use(userRoute);
+app.use(taskRoute);
 
 const start = () => {
   app.listen(3000, async () => {

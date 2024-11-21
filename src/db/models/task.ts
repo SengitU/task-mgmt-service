@@ -1,16 +1,36 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const taskSchema = new Schema({
-  title: String,
-  description: String,
+export const TaskStatus = {
+  CLOSED: "CLOSED",
+  OPEN: "OPEN",
+} as const;
+
+export type Task = {
+  id: number;
+  title: String;
+  description: String;
+  status: keyof typeof TaskStatus;
+  authorId: number;
+  dueAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+const taskSchema = new Schema<Task>({
+  id: { type: Number, required: true, unique: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
   status: {
     type: String,
     enum: ["OPEN", "CLOSED"],
+    required: true,
   },
+  authorId: { type: Number, required: true },
+  dueAt: { type: Date, required: true },
   createdAt: { type: Date, default: new Date() },
   updatedAt: { type: Date, default: new Date() },
 });
 
-const UserModel = new Model("User", taskSchema);
+const TaskModel = model("Task", taskSchema);
 
-export default UserModel;
+export default TaskModel;

@@ -4,8 +4,9 @@ import server from "./server";
 (async () => {
   try {
     await db.connect();
-    await server.start();
+    server.start();
   } catch (err) {
+    console.log({ err });
     await db.disconnect();
   }
 })();

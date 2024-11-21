@@ -1,13 +1,11 @@
 import { Router } from "express";
 
 import createUserHandler from "./create";
-import updateUserHandler from "./update";
-import getUserHandler from "./get";
+import updatePasswordHandler from "./updatePassword";
 
 const userRoute = Router();
 
-userRoute.get("/user", getUserHandler);
-userRoute.put("/user", updateUserHandler);
+userRoute.put("/user", updatePasswordHandler);
 userRoute.post("/user", createUserHandler);
 
 export default userRoute;
