@@ -3,6 +3,7 @@ import type { User } from "../../db/models/user";
 import UserModel from "../../db/models/user";
 import sequence from "../../db/models/sequence";
 import generateHash from "../../utils/generateHash";
+import ConstraintError from "../errors/ConstraintError";
 
 const createUser = async (user: User) => {
   try {
@@ -18,8 +19,7 @@ const createUser = async (user: User) => {
       name: newUser.name,
     };
   } catch (err) {
-    console.log(err);
-    throw Error("Email address already exists");
+    throw new ConstraintError("Email address already exists");
   }
 };
 

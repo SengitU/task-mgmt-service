@@ -7,8 +7,8 @@ export const TaskStatus = {
 
 export type Task = {
   id: number;
-  title: String;
-  description: String;
+  title: string;
+  description: string;
   status: keyof typeof TaskStatus;
   authorId: number;
   dueAt: Date;

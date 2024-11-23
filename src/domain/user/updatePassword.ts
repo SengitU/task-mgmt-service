@@ -1,22 +1,23 @@
 import generateHash from "../../utils/generateHash";
 import type { User } from "../../db/models/user";
 import UserModel from "../../db/models/user";
+import NotFoundError from "../errors/NotFoundError";
+import UnauthorizedError from "../errors/UnauthorizedError";
 
 const updatePassword = async (
   user: Pick<User, "email" | "password">,
   newPassword: string
 ) => {
-  console.log({ user });
   const existingUser = await UserModel.findOne({
     email: user.email,
   });
-  console.log({ existingUser });
-  // Maybe implement NotFoundError
-  if (!existingUser) throw new Error("Not Found");
+  // This case should never happen as user is already logged in
+  if (!existingUser) throw new NotFoundError("User not found");
 
   const oldPasswordHash = generateHash(user.password);
-  // TODO: Unauth exception?
-  if (oldPasswordHash !== existingUser.password) throw new Error("Unauth");
+
+  if (oldPasswordHash !== existingUser.password)
+    throw new UnauthorizedError("Password is incorrect");
   const newPasswordHash = generateHash(newPassword);
 
   await UserModel.updateOne({

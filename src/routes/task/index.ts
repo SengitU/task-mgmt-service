@@ -1,11 +1,13 @@
 import { Router } from "express";
 
-import createTaskHandler from "./create";
-import getByUserHandler from "./getByUser";
+import createHandler from "./create";
+import updateHandler from "./update";
+import findAllByUserHandler from "./findAllByUser";
 
 const taskRoute = Router();
 
-taskRoute.post("/task", createTaskHandler);
-taskRoute.get("/task", getByUserHandler);
+taskRoute.post("/task", createHandler);
+taskRoute.get("/task", findAllByUserHandler);
+taskRoute.put("/task/:taskId", updateHandler);
 
 export default taskRoute;
