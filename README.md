@@ -14,10 +14,14 @@ Task management service is a NodeJS application to provide functionalities as fo
 
 ### Docker
 
+#### Dev
 - Install a docker engine like [docker desktop](https://www.docker.com/products/docker-desktop/)
 - Navigate to the project folder
-- run `docker-compose up --build` command
+- Run `docker-compose up --build` command
 - Hot reload is supported
+
+#### Production
+- Run `docker-compose -f docker-compose.prod.yml up --build` to run the production build
 
 ### NodeJS
 
@@ -28,3 +32,10 @@ Task management service is a NodeJS application to provide functionalities as fo
   - JWT_SECRET_KEY secret key for JWT encryption
 
 Docker solution already initializes with a mongodb instance and provides a secret key.
+
+## Tech Stack
+
+- Typescript
+- Express
+- Ajv
+- Mongoose

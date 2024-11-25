@@ -6,6 +6,7 @@ services:
       target: production
     ports:
       - 3000:3000
-    environments:
+    environment:
       - DB_CONNECTION_URL=mongodb+srv://ugurcansengit:password@cluster0.7moao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0;
       - NODE_ENV=production
+      - JWT_SECRET_KEY=secret-key
