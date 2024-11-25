@@ -1,5 +1,5 @@
 // TODO: acquire type User from somewhere else
-import type { User } from "../../db/models/user";
+import type { User } from "./";
 import UserModel from "../../db/models/user";
 import sequence from "../../db/models/sequence";
 import generateHash from "../../utils/generateHash";

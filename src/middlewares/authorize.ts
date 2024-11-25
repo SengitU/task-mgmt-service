@@ -1,6 +1,6 @@
-import jwt, { Secret, JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { User } from "../db/models/user";
+import type { User } from "../domain/user";
 import UnauthorizedError from "../domain/errors/UnauthorizedError";
 
 export interface AuthorizedRequest extends Request {
@@ -18,11 +18,14 @@ export const authorize = async (
     throw new UnauthorizedError("Unauthorized");
   }
 
-  const decoded = jwt.verify(
-    token,
-    process.env.JWT_SECRET_KEY as string // TODO: define env via global type
-  ) as unknown as Pick<User, "id" | "email">;
-  (req as AuthorizedRequest).user = decoded;
-
-  next();
+  try {
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET_KEY!
+    ) as unknown as Pick<User, "id" | "email">;
+    (req as AuthorizedRequest).user = decoded;
+    next();
+  } catch (err) {
+    next(new UnauthorizedError(err.message));
+  }
 };

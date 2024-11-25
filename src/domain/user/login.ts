@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 // TODO: acquire type User from somewhere else
-import type { User } from "../../db/models/user";
+import type { User } from "./";
 import UserModel from "../../db/models/user";
 import generateHash from "../../utils/generateHash";
 import UnauthorizedError from "../errors/UnauthorizedError";
@@ -20,7 +20,7 @@ const login = async (user: Pick<User, "email" | "password">) => {
 
   const token = jwt.sign(
     { id: dbUser.id, email: dbUser.email },
-    process.env.JWT_SECRET_KEY as string,
+    process.env.JWT_SECRET_KEY!,
     {
       expiresIn: "1h",
     }

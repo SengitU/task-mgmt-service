@@ -4,8 +4,7 @@ import { JSONSchemaType } from "ajv";
 import { authorize, type AuthorizedRequest } from "../../middlewares/authorize";
 import { secure } from "../../middlewares/secure";
 import { validate } from "../../middlewares/validate";
-import { createTask } from "../../domain/task";
-import { Task } from "../../db/models/task";
+import { createTask, type Task } from "../../domain/task";
 
 type TaskRequestBody = Pick<Task, "title" | "description"> & {
   dueAt: string;
@@ -16,7 +15,11 @@ const createTaskSchema: JSONSchemaType<TaskRequestBody> = {
   properties: {
     title: { type: "string", minLength: 2, maxLength: 100 },
     description: { type: "string", minLength: 5, maxLength: 300 },
-    dueAt: { type: "string", format: "iso-date-time" },
+    dueAt: {
+      type: "string",
+      format: "date-time",
+      errorMessage: "Must be iso date time format",
+    },
   },
   required: ["title", "description", "dueAt"],
   additionalProperties: false,
@@ -24,7 +27,7 @@ const createTaskSchema: JSONSchemaType<TaskRequestBody> = {
 
 const createTaskHandler = async (
   req: Request<unknown, unknown, TaskRequestBody>,
-  res: Response<Partial<Task>>
+  res: Response<Omit<Task, "updatedAt">>
 ) => {
   const task = req.body;
 

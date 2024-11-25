@@ -4,15 +4,14 @@ import { JSONSchemaType } from "ajv";
 import { authorize, AuthorizedRequest } from "../../middlewares/authorize";
 import { secure } from "../../middlewares/secure";
 import { validate } from "../../middlewares/validate";
-import { User } from "../../db/models/user";
-import updatePassword from "../../domain/user/updatePassword";
+import { type User, updatePassword } from "../../domain/user";
 
 type UpdateUserRequestBody = Pick<User, "password"> & { newPassword: string };
 
 const updatePasswordSchema: JSONSchemaType<UpdateUserRequestBody> = {
   type: "object",
   properties: {
-    password: { type: "string", minLength: 8, maxLength: 32 },
+    password: { type: "string", maxLength: 32 },
     newPassword: { type: "string", minLength: 8, maxLength: 32 },
   },
   required: ["password", "newPassword"],

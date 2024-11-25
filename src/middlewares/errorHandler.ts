@@ -9,16 +9,16 @@ export const errorHandler = (
   switch (error.name) {
     case "ValidationError":
     case "ConstraintError":
-      res.status(400).json(error.message);
+      res.status(400).json({ message: error.message });
       break;
     case "UnauthorizedError":
-      res.status(401).json(error.message);
+      res.status(401).json({ message: error.message });
       break;
     case "NotFoundError":
-      res.status(404).json(error.message);
+      res.status(404).json({ message: error.message });
       break;
     default:
-      res.status(500).json("Something went wrong");
+      res.status(500).json({ message: "Something went wrong" });
       break;
   }
   next();

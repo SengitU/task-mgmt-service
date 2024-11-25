@@ -1,8 +1,6 @@
 export default class ConstraintError extends Error {
-    name: "ConstraintError";
-  
-    constructor(message: string) {
-      super(message);
-    }
+  constructor(message: string) {
+    super(message);
+    this.name = "ConstraintError";
   }
-  
+}

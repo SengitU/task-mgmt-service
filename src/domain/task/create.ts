@@ -1,7 +1,6 @@
 // TODO: acquire type User from somewhere else
 import sequence from "../../db/models/sequence";
-import type { Task } from "../../db/models/task";
-import { TaskStatus } from "../../db/models/task";
+import { type Task, TaskStatus } from "./";
 import TaskModel from "../../db/models/task";
 
 type CreateTaskPayload = Pick<
@@ -25,7 +24,8 @@ const createTask = async (task: CreateTaskPayload) => {
     status: newTask.status,
     dueAt: newTask.dueAt,
     createdAt: newTask.createdAt,
-    authorId: newTask.authorId, // TODO
+    updatedAt: newTask.updatedAt,
+    authorId: newTask.authorId,
   };
 };
 

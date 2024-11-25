@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: .
+      target: production
+    ports:
+      - 3000:3000
+    environments:
+      - DB_CONNECTION_URL=mongodb+srv://ugurcansengit:password@cluster0.7moao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0;
+      - NODE_ENV=production

@@ -3,8 +3,7 @@ import { JSONSchemaType } from "ajv";
 
 import { validate } from "../../middlewares/validate";
 import { secure } from "../../middlewares/secure";
-import { createUser } from "../../domain/user";
-import { User } from "../../db/models/user";
+import { type User, createUser } from "../../domain/user";
 
 const emailValidatorPattern = "^[-\\w.]+@([-\\w]+.)+[-\\w]{2,4}$";
 

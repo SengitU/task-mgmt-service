@@ -1,5 +1,5 @@
 // TODO: acquire type Task from somewhere else
-import { Task } from "../../db/models/task";
+import type { Task } from "./";
 import TaskModel from "../../db/models/task";
 import NotFoundError from "../errors/NotFoundError";
 

@@ -5,24 +5,32 @@ import { authorize, AuthorizedRequest } from "../../middlewares/authorize";
 import { secure } from "../../middlewares/secure";
 import { validate } from "../../middlewares/validate";
 import { updateTask } from "../../domain/task";
-import { Task, TaskStatus } from "../../db/models/task";
+import { type Task, TaskStatus } from "../../domain/task";
 
-type TaskRequestPayload = Pick<
-  Task,
-  "title" | "description" | "dueAt" | "status"
-> & {
-  dueAt: string;
-};
+type TaskRequestPayload = Partial<
+  Pick<Task, "title" | "description" | "dueAt" | "status"> & {
+    dueAt: string;
+  }
+>;
 
 const updatePasswordBodySchema: JSONSchemaType<TaskRequestPayload> = {
   type: "object",
   properties: {
-    title: { type: "string", minLength: 2, maxLength: 100 },
-    description: { type: "string", minLength: 5, maxLength: 300 },
-    dueAt: { type: "string", format: "iso-date-time" },
-    status: { type: "string", enum: [TaskStatus.CLOSED, TaskStatus.OPEN] },
+    title: { type: "string", minLength: 2, maxLength: 100, nullable: true },
+    description: {
+      type: "string",
+      minLength: 5,
+      maxLength: 300,
+      nullable: true,
+    },
+    dueAt: { type: "string", format: "iso-date-time", nullable: true },
+    status: {
+      type: "string",
+      enum: [TaskStatus.CLOSED, TaskStatus.OPEN],
+      nullable: true,
+    },
   },
-  required: ["title", "description", "dueAt"],
+  minProperties: 1,
   additionalProperties: false,
 };
 

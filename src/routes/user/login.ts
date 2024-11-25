@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { JSONSchemaType } from "ajv";
 
-import { login } from "../../domain/user";
-import { User } from "../../db/models/user";
+import { type User, login } from "../../domain/user";
 import { secure } from "../../middlewares/secure";
 import { validate } from "../../middlewares/validate";
 
@@ -16,7 +15,7 @@ const loginUserSchema: JSONSchemaType<Pick<User, "email" | "password">> = {
       pattern: emailValidatorPattern,
       errorMessage: "Must be a valid email address",
     },
-    password: { type: "string", minLength: 8, maxLength: 32 },
+    password: { type: "string", maxLength: 32 },
   },
   required: ["email", "password"],
   additionalProperties: false,

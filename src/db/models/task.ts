@@ -1,20 +1,6 @@
 import { Schema, model } from "mongoose";
 
-export const TaskStatus = {
-  CLOSED: "CLOSED",
-  OPEN: "OPEN",
-} as const;
-
-export type Task = {
-  id: number;
-  title: string;
-  description: string;
-  status: keyof typeof TaskStatus;
-  authorId: number;
-  dueAt: Date;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { Task } from '../../domain/task'
 
 const taskSchema = new Schema<Task>({
   id: { type: Number, required: true, unique: true },
@@ -27,9 +13,13 @@ const taskSchema = new Schema<Task>({
   },
   authorId: { type: Number, required: true },
   dueAt: { type: Date, required: true },
-  createdAt: { type: Date, default: new Date() },
+  createdAt: { type: Date, default: new Date(), required: true },
   updatedAt: { type: Date, default: new Date() },
 });
+
+taskSchema.index({ title: "text", description: "text" });
+taskSchema.index({ id: 1, createdAt: 1 });
+taskSchema.index({ authorId: 1, createdAt: 1 });
 
 const TaskModel = model("Task", taskSchema);
 

@@ -1,9 +1,15 @@
 // TODO: acquire type User from somewhere else
 import TaskModel from "../../db/models/task";
 
-const findByUser = async (authorId: number) => {
+const createSearchQuery = (searchTerm?: string) => {
+  if (searchTerm) return { $text: { $search: searchTerm } };
+  return {};
+};
+
+const findByUser = async (authorId: number, searchTerm?: string) => {
   const tasks = await TaskModel.find({
     authorId: authorId,
+    ...createSearchQuery(searchTerm),
   });
   return tasks.map((task) => ({
     id: task.id,
@@ -13,7 +19,7 @@ const findByUser = async (authorId: number) => {
     dueAt: task.dueAt,
     createdAt: task.createdAt,
     authorId: task.authorId,
-  }))
+  }));
 };
 
 export default findByUser;
