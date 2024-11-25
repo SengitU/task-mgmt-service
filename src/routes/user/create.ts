@@ -32,7 +32,7 @@ const createUserHandler = async (
 
   const newUser = await createUser(user);
 
-  res.status(201).json(newUser).send();
+  res.status(201).json(newUser);
 };
 
 export default [validate(createUserSchema), secure(createUserHandler)];

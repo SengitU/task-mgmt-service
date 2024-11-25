@@ -27,7 +27,7 @@ const findAllByUserHandler = async (
     searchTerm
   );
 
-  res.status(200).json(tasks).send();
+  res.status(200).json(tasks);
 };
 
 export default [authorize, secure(findAllByUserHandler)];

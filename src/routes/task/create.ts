@@ -37,7 +37,7 @@ const createTaskHandler = async (
     dueAt: new Date(task.dueAt),
   });
   // TODO: Add a link?
-  res.status(201).json(newTask).send();
+  res.status(201).json(newTask);
 };
 
 export default [

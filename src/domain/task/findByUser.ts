@@ -10,7 +10,8 @@ const findByUser = async (authorId: number, searchTerm?: string) => {
   const tasks = await TaskModel.find({
     authorId: authorId,
     ...createSearchQuery(searchTerm),
-  });
+  }).sort({ createdAt: -1 });
+
   return tasks.map((task) => ({
     id: task.id,
     title: task.title,

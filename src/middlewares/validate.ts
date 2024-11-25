@@ -20,7 +20,6 @@ export const validate =
   async (req: Request, res: Response, next: NextFunction) => {
     const validatorFn = ajv.compile(schema);
     const toValidate = req[type];
-    console.log({ toValidate });
 
     if (!validatorFn(toValidate)) {
       const errorMessages = validatorFn

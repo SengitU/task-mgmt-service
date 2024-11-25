@@ -47,7 +47,7 @@ const updateTaskHandler = async (
     updates
   );
 
-  res.status(200).json(updatedTask).send();
+  res.status(200).json(updatedTask);
 };
 
 export default [

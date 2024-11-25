@@ -21,5 +21,6 @@ export const errorHandler = (
       res.status(500).json({ message: "Something went wrong" });
       break;
   }
+
   next();
 };
