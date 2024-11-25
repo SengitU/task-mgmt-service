@@ -38,7 +38,7 @@ userRoute.post("/login", loginHandler);
  * @summary Updates user password
  * @param {string} request.headers.Authorization.required - JWT token for authenticated user
  * @return 200 - OK
- * @return 400 - Error Message - application/json
+ * @return {object} 400 - Error Message - application/json
  * @example response - 400 - error example
  * { message: "error happened" }
  */
