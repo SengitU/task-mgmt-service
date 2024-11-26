@@ -1,6 +1,6 @@
 import type { User } from "./";
 import generateHash from "../../utils/generateHash";
-import UserModel from "../../db/models/user";
+import { UserModel } from "../../db/models/user";
 import NotFoundError from "../errors/NotFoundError";
 import UnauthorizedError from "../errors/UnauthorizedError";
 

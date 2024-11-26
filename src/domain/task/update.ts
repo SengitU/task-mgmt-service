@@ -1,6 +1,5 @@
-// TODO: acquire type Task from somewhere else
 import type { Task } from "./";
-import TaskModel from "../../db/models/task";
+import { TaskModel } from "../../db/models/task";
 import NotFoundError from "../errors/NotFoundError";
 
 const updateTask = async (
@@ -27,6 +26,7 @@ const updateTask = async (
     status: updatedTask.status,
     dueAt: updatedTask.dueAt,
     createdAt: updatedTask.createdAt,
+    updatedAt: updatedTask.updatedAt,
     authorId: updatedTask.authorId,
   };
 };

@@ -27,6 +27,7 @@ Task management service is a NodeJS application to provide functionalities as fo
 
 - Install NodeJS 18
 - Run `npm i` to install dependencies
+- Run `npm run test` to install dependencies
 - Provide dependencies via `.env` file
   - DB_CONNECTION_URL mongodb connection string
   - JWT_SECRET_KEY secret key for JWT encryption

@@ -13,6 +13,4 @@ const userSchema = new Schema<User>({
 
 userSchema.index({ id: 1, email: 1 });
 
-const UserModel = model("User", userSchema);
-
-export default UserModel;
+export const UserModel = model("User", userSchema);

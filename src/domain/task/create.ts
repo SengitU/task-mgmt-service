@@ -1,7 +1,6 @@
-// TODO: acquire type User from somewhere else
 import sequence from "../../db/models/sequence";
 import { type Task, TaskStatus } from "./";
-import TaskModel from "../../db/models/task";
+import { TaskModel } from "../../db/models/task";
 
 type CreateTaskPayload = Pick<
   Task,

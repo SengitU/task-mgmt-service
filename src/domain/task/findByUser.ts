@@ -1,5 +1,4 @@
-// TODO: acquire type User from somewhere else
-import TaskModel from "../../db/models/task";
+import { TaskModel } from "../../db/models/task";
 
 const createSearchQuery = (searchTerm?: string) => {
   if (searchTerm) return { $text: { $search: searchTerm } };
@@ -19,6 +18,7 @@ const findByUser = async (authorId: number, searchTerm?: string) => {
     status: task.status,
     dueAt: task.dueAt,
     createdAt: task.createdAt,
+    updatedAt: task.updatedAt,
     authorId: task.authorId,
   }));
 };

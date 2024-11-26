@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import type { Task } from '../../domain/task'
+import type { Task } from "../../domain/task";
 
 const taskSchema = new Schema<Task>({
   id: { type: Number, required: true, unique: true },
@@ -21,6 +21,4 @@ taskSchema.index({ title: "text", description: "text" });
 taskSchema.index({ id: 1, createdAt: 1 });
 taskSchema.index({ authorId: 1, createdAt: 1 });
 
-const TaskModel = model("Task", taskSchema);
-
-export default TaskModel;
+export const TaskModel = model("Task", taskSchema);

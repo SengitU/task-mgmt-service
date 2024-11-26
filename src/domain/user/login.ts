@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 
-// TODO: acquire type User from somewhere else
 import type { User } from "./";
-import UserModel from "../../db/models/user";
+import { UserModel } from "../../db/models/user";
 import generateHash from "../../utils/generateHash";
 import UnauthorizedError from "../errors/UnauthorizedError";
 
